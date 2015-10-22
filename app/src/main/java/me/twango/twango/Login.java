@@ -109,9 +109,12 @@ public class Login extends AppCompatActivity {
                                     bitmap = response.getBitmap();
                                     Toast.makeText(context,"Signed In",Toast.LENGTH_LONG).show();
                                     try{
-                                        User.setUser(context,email,name, NameConstant.LOGIN_TYPE_FACEBOOK,bitmap,ImageRequest.getProfilePictureUri(object.getString("id"),100,100).toString());
-                                        setResult(RESULT_OK);
-                                        finish();
+                                        User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString());
+                                        //setResult(RESULT_OK);
+                                        //finish();
+                                        Intent getInfoActivity = new Intent(context,GetInfoActivity.class);
+                                        startActivity(getInfoActivity);
+
                                     }catch (Exception ex){
 
                                     }
@@ -163,8 +166,10 @@ public class Login extends AppCompatActivity {
                                             bitmap = response.getBitmap();
                                             Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
                                             User.setUser(context, email, name, NameConstant.LOGIN_TYPE_GMAIL, bitmap, imageUrl);
-                                            setResult(RESULT_OK);
-                                            finish();
+                                            //setResult(RESULT_OK);
+                                            //finish();
+                                            Intent getInfoActivity = new Intent(context,GetInfoActivity.class);
+                                            startActivity(getInfoActivity);
                                         }
                                     }).build();
                                     ImageDownloader.downloadAsync(request);
@@ -213,13 +218,13 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /*if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK) {
+        if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK) {
             if (!mGoogleApiClient.isConnecting()) {
                 mGoogleApiClient.connect();
             }
-        }else {*/
+        }else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
-        //}
+        }
     }
 
 }

@@ -16,7 +16,7 @@ import com.facebook.FacebookSdk;
 /**
  * Created by AVIATER on 13-Oct-15.
  */
-public class GetStarted extends Activity{
+public class GetStarted extends AppCompatActivity{
     ViewPager viewPager;
     Button button;
     GetStartedSwipeAdapter adapter;

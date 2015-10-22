@@ -17,12 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        SharedPreferences prefs1 = getSharedPreferences("appOpenCount", Context.MODE_PRIVATE);
-        int appOpenCount = prefs1.getInt("appOpenCount", 0);
-        appOpenCount++;
-        SharedPreferences.Editor editor1 = getSharedPreferences("appOpenCount", Context.MODE_PRIVATE).edit();
-        editor1.putInt("appOpenCount", appOpenCount);
-        editor1.commit();
         mHandler.postDelayed(new LoadActivitiesThread(), 2000);
     }
 
@@ -39,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadActivities(){
-        Intent home = new Intent(this, GetStarted.class);
-        startActivity(home);
+        Intent getStarted = new Intent(this, GetStarted.class);
+        startActivity(getStarted);
         finish();
     }
 
