@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#bbb">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FRIENDS CALL ME..."
+        android:id="@+id/textView12"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="24dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intellectual"
+        android:id="@+id/checkBox15"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/textView12"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:textSize="27dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Night Owl"
+        android:id="@+id/checkBox16"
+        android:checked="false"
+        android:textSize="27dp"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/textView12"
+        android:layout_toRightOf="@+id/checkBox17"
+        android:layout_toEndOf="@+id/checkBox17" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Animal Lover"
+        android:id="@+id/checkBox17"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/checkBox15"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="27dp"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Foodie"
+        android:id="@+id/checkBox18"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/checkBox16"
+        android:layout_toRightOf="@+id/textView12"
+        android:layout_toEndOf="@+id/textView12"
+        android:checked="false"
+        android:textSize="27dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Health Freak"
+        android:id="@+id/checkBox19"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/checkBox17"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="27dp"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Early Bird"
+        android:id="@+id/checkBox20"
+        android:textSize="27dp"
+        android:checked="false"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/checkBox18"
+        android:layout_alignRight="@+id/checkBox18"
+        android:layout_alignEnd="@+id/checkBox18" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Party Hopper"
+        android:id="@+id/checkBox21"
+        android:layout_below="@+id/checkBox19"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="27dp"
+        android:layout_marginTop="8dp"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Creative"
+        android:id="@+id/checkBox22"
+        android:checked="false"
+        android:layout_marginTop="8dp"
+        android:textSize="27dp"
+        android:layout_below="@+id/checkBox20"
+        android:layout_alignRight="@+id/checkBox16"
+        android:layout_alignEnd="@+id/checkBox16" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fashion Buff"
+        android:id="@+id/checkBox23"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/checkBox21"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="27dp"
+        android:checked="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button4"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button5"
+        android:layout_marginTop="8dp"
+        android:layout_alignTop="@+id/button4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
