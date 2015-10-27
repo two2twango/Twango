@@ -59,6 +59,7 @@ public class Login extends AppCompatActivity {
     Context context;
     String name;
     String email;
+    String uid;
     Bitmap bitmap;
 
     private static final String TAG = "ExampleActivity";
@@ -80,6 +81,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login);
         getSupportActionBar().hide();
         context = this;
+        if(User.getInstance(this)!=null){
+            Intent getInfoActivity = new Intent(context,GetInfoActivity.class);
+            startActivity(getInfoActivity);
+        }
         callbackManager = CallbackManager.Factory.create();
         AccessToken token = AccessToken.getCurrentAccessToken();
         if (token != null) {
@@ -103,13 +108,14 @@ public class Login extends AppCompatActivity {
                         try {
                             name = object.getString("name");
                             email = object.getString("email");
+                            uid = object.getString("id");
                             ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, ImageRequest.getProfilePictureUri(object.getString("id"),100,100));
                             ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
                                 public void onCompleted(ImageResponse response) {
                                     bitmap = response.getBitmap();
                                     Toast.makeText(context,"Signed In",Toast.LENGTH_LONG).show();
                                     try{
-                                        User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString());
+                                        User.setUser(context,uid, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString());
                                         //setResult(RESULT_OK);
                                         //finish();
                                         Intent getInfoActivity = new Intent(context,GetInfoActivity.class);
@@ -159,13 +165,14 @@ public class Login extends AppCompatActivity {
                                     name = currentPerson.getDisplayName();
                                     final String imageUrl = currentPerson.getImage().getUrl();
                                     Uri uri = Uri.parse(imageUrl);
+                                    uid = currentPerson.getId();
                                     email = Plus.AccountApi.getAccountName(mGoogleApiClient);
                                     ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, uri);
                                     ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
                                         public void onCompleted(ImageResponse response) {
                                             bitmap = response.getBitmap();
                                             Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
-                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_GMAIL, bitmap, imageUrl);
+                                            User.setUser(context,uid, email, name, NameConstant.LOGIN_TYPE_GMAIL, bitmap, imageUrl);
                                             //setResult(RESULT_OK);
                                             //finish();
                                             Intent getInfoActivity = new Intent(context,GetInfoActivity.class);

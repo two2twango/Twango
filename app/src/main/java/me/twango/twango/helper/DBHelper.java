@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		String query;
-		query = "CREATE TABLE IF NOT EXISTS user(loginType TEXT,name TEXT,email TEXT,bitmap BLOB,imageUrl TEXT)";
+		query = "CREATE TABLE IF NOT EXISTS user(loginType TEXT,uid TEXT,name TEXT,email TEXT,bitmap BLOB,imageUrl TEXT)";
 		database.execSQL(query);
 	}
 	@Override
@@ -46,13 +46,14 @@ public class DBHelper extends SQLiteOpenHelper{
 		database.execSQL(deleteQuery);
 	}
 
-	public void insertUser(String loginType,String name,String email,Bitmap bitmap,String imageUrl){
+	public void insertUser(String loginType,String uid,String name,String email,Bitmap bitmap,String imageUrl){
 		SQLiteDatabase database = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put("loginType",loginType);
 		values.put("name",name);
 		values.put("email",email);
 		values.put("bitmap",getBytes(bitmap));
+		values.put("uid",uid);
 		values.put("imageUrl",imageUrl);
 		database.insert("user", null, values);
 		database.close();
@@ -66,11 +67,12 @@ public class DBHelper extends SQLiteOpenHelper{
 			User user = new User();
 			cursor.moveToNext();
 			user.loginType = cursor.getString(0);
-			user.name = cursor.getString(1);
-			user.email = cursor.getString(2);
-			byte[] image = cursor.getBlob(3);
+			user.uid = cursor.getString(1);
+			user.name = cursor.getString(2);
+			user.email = cursor.getString(3);
+			byte[] image = cursor.getBlob(4);
 			user.bitmap = getImage(image);
-			user.imageUrl = cursor.getString(4);
+			user.imageUrl = cursor.getString(5);
 			return user;
 		}catch (Exception ex){
 			return new User();
@@ -93,7 +95,6 @@ public class DBHelper extends SQLiteOpenHelper{
 	{
 		String query = "DROP TABLE IF EXISTS Bookmarked";
 		SQLiteDatabase database = this.getWritableDatabase();
-
 		database.execSQL(query);
 	}
 

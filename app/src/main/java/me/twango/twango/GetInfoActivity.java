@@ -20,7 +20,7 @@ public class GetInfoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setPager();
 
-    }
+}
 
     private void setPager(){
         viewPager = (ViewPager)findViewById(R.id.viewPager);

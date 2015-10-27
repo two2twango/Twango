@@ -27,4 +27,12 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
     compile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.android.support:design:23.1.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'info.hoang8f:fbutton:1.0.5'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.9'
+    compile 'com.joanzapata.android:android-iconify:1.0.9'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.parse.bolts:bolts-android:1.1.4'
+    compile files('libs/Parse-1.8.1.jar')
 }
