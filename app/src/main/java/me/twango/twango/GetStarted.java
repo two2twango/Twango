@@ -44,7 +44,6 @@ public class GetStarted extends AppCompatActivity{
 
                 Intent intent = new Intent(context, Login.class);
                 startActivity(intent);
-
             }
 
         });

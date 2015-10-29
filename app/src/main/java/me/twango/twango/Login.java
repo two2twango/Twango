@@ -57,6 +57,10 @@ import java.util.Arrays;
 public class Login extends AppCompatActivity {
     CallbackManager callbackManager;
     Context context;
+    /*
+    User user = new User;
+
+     */
     String name;
     String email;
     String uid;
@@ -91,7 +95,7 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, token.getToken(), Toast.LENGTH_LONG).show();
         }
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        //loginButton.setReadPermissions(Arrays.asList("email, public_profile"));
+        //loginButton.setReadPermissions('email','user_friends','public_profile','user_relationships','user_birthday','user_relationship_details','user_hometown','user_likes','user_work_history','user_location','user_education_history');
         callbackManager = CallbackManager.Factory.create();
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -109,6 +113,31 @@ public class Login extends AppCompatActivity {
                             name = object.getString("name");
                             email = object.getString("email");
                             uid = object.getString("id");
+                            /*
+                            user.uid = object.getString("uid");
+                            user.loginMethod = 'Facebook';
+                            user.token = object.getString("token");
+                            user.firstName = object.contains('first_name') ? object.getString("first_name") : null;
+                            user.lastName = object.contains('last_name') ? object.getString("last_name") : null;
+                            user.email = object.contains('email') ? object.getString("email") : null;
+                            user.gender = object.contains('gender') ? object.getString("gender") : null;
+                            user.interestedIn = user.gender=='male'||user.gender==null ? 'female' : 'male';
+                            user.profileUrl = object.contains('link') ? object.getString("link") : null;
+                            user.birthday = object.contains('birthday') ? object.getString("birthday") : null;
+                            user.age =
+                            user.profileUrl = object.contains('link') ? object.getString("link") : null;
+                            user.relationshipStatus = object.contains('relationship_status') ? object.getString("relationship_status") : null;
+                            user.dpUrl = 'http://graph.facebook.com/v2.5/' + user.uid + '/picture?width=180&height=180';
+                            user.originalDpUrl = 'http://graph.facebook.com/v2.5/' + user.uid + '/picture?width=1920';
+                            user.friends =                                  // obj->friends->summary->total_count
+                            user.college =                                 //obj->education->[education.length-1]->school->name
+                            user.degree =                                  //obj->education->[education.length-1]->degree->name
+                            user.companyName =                             //obj->work->[0]->employer->name
+                            user.position =                             //obj->work->[0]->position->name
+                            user.hometown =                             //obj->hometown->name
+                            user.currentCity =                          //obj->location->name
+
+                             */
                             ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, ImageRequest.getProfilePictureUri(object.getString("id"),100,100));
                             ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
                                 public void onCompleted(ImageResponse response) {
@@ -134,6 +163,7 @@ public class Login extends AppCompatActivity {
                     }
                 });
                 Bundle parameters = new Bundle();
+            //  parameters.putString("fields", "id,name,first_name,last_name,age_range,link,verified,gender,email,locale,friends,friendlists,likes,work,relationship_status,hometown,location,birthday,education");
                 parameters.putString("fields", "id,name,email,gender");
                 request.setParameters(parameters);
                 request.executeAsync();
