@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login);
         getSupportActionBar().hide();
         context = this;
-        if(User.getInstance(this)!=null){
+        if(User.getInstance(this).loginType.equalsIgnoreCase("")){
             Intent getInfoActivity = new Intent(context,GetInfoActivity.class);
             startActivity(getInfoActivity);
         }
@@ -110,11 +110,10 @@ public class Login extends AppCompatActivity {
                             GraphResponse response) {
                         // Application code
                         try {
-                            name = object.getString("name");
-                            email = object.getString("email");
-                            uid = object.getString("id");
-                            /*
-                            user.uid = object.getString("uid");
+                            //name = object.getString("name");
+                            //email = object.getString("email");
+                            //uid = object.getString("id");
+                            /*user.uid = object.getString("uid");
                             user.loginMethod = 'Facebook';
                             user.token = object.getString("token");
                             user.firstName = object.contains('first_name') ? object.getString("first_name") : null;
@@ -135,35 +134,34 @@ public class Login extends AppCompatActivity {
                             user.companyName =                             //obj->work->[0]->employer->name
                             user.position =                             //obj->work->[0]->position->name
                             user.hometown =                             //obj->hometown->name
-                            user.currentCity =                          //obj->location->name
+                            user.currentCity =                          //obj->location->name*/
 
-                             */
-                            ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, ImageRequest.getProfilePictureUri(object.getString("id"),100,100));
+                            ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100));
                             ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
                                 public void onCompleted(ImageResponse response) {
                                     bitmap = response.getBitmap();
-                                    Toast.makeText(context,"Signed In",Toast.LENGTH_LONG).show();
-                                    try{
-                                        User.setUser(context,uid, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString());
+                                    Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+                                    try {
                                         //setResult(RESULT_OK);
                                         //finish();
-                                        Intent getInfoActivity = new Intent(context,GetInfoActivity.class);
+                                        User.setUser(context,object,NameConstant.LOGIN_TYPE_FACEBOOK,bitmap,ImageRequest.getProfilePictureUri(object.getString("id"),100,100).toString());
+                                        Intent getInfoActivity = new Intent(context, GetInfoActivity.class);
                                         startActivity(getInfoActivity);
 
-                                    }catch (Exception ex){
+                                    } catch (Exception ex) {
 
                                     }
                                 }
                             }).build();
                             ImageDownloader.downloadAsync(request);
-                        }catch (Exception ex){
+                        } catch (Exception ex) {
 
                         }
                         Log.v("LoginActivity", response.toString());
                     }
                 });
                 Bundle parameters = new Bundle();
-            //  parameters.putString("fields", "id,name,first_name,last_name,age_range,link,verified,gender,email,locale,friends,friendlists,likes,work,relationship_status,hometown,location,birthday,education");
+                //  parameters.putString("fields", "id,name,first_name,last_name,age_range,link,verified,gender,email,locale,friends,friendlists,likes,work,relationship_status,hometown,location,birthday,education");
                 parameters.putString("fields", "id,name,email,gender");
                 request.setParameters(parameters);
                 request.executeAsync();
@@ -182,7 +180,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        signIn = (SignInButton)findViewById(R.id.sign_in_button);
+        /*signIn = (SignInButton)findViewById(R.id.sign_in_button);
         mGoogleApiClient = new GoogleApiClient.Builder(context)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
@@ -202,7 +200,7 @@ public class Login extends AppCompatActivity {
                                         public void onCompleted(ImageResponse response) {
                                             bitmap = response.getBitmap();
                                             Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
-                                            User.setUser(context,uid, email, name, NameConstant.LOGIN_TYPE_GMAIL, bitmap, imageUrl);
+                                            //User.setUser(context,uid, email, name, NameConstant.LOGIN_TYPE_GMAIL, bitmap, imageUrl);
                                             //setResult(RESULT_OK);
                                             //finish();
                                             Intent getInfoActivity = new Intent(context,GetInfoActivity.class);
@@ -249,7 +247,7 @@ public class Login extends AppCompatActivity {
                 mGoogleApiClient.connect();
             }
         });
-
+*/
 
     }
 

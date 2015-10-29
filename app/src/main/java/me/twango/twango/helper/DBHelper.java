@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		String query;
-		query = "CREATE TABLE IF NOT EXISTS user(loginType TEXT,uid TEXT,name TEXT,email TEXT,bitmap BLOB,imageUrl TEXT)";
+		query = "CREATE TABLE IF NOT EXISTS user(loginType TEXT,JSONObject TEXT,bitmap BLOB,imageUrl TEXT)";
 		database.execSQL(query);
 	}
 	@Override
@@ -46,14 +46,12 @@ public class DBHelper extends SQLiteOpenHelper{
 		database.execSQL(deleteQuery);
 	}
 
-	public void insertUser(String loginType,String uid,String name,String email,Bitmap bitmap,String imageUrl){
+	public void insertUser(String loginType,JSONObject object,Bitmap bitmap,String imageUrl){
 		SQLiteDatabase database = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put("loginType",loginType);
-		values.put("name",name);
-		values.put("email",email);
+		values.put("JSONObject",object.toString());
 		values.put("bitmap",getBytes(bitmap));
-		values.put("uid",uid);
 		values.put("imageUrl",imageUrl);
 		database.insert("user", null, values);
 		database.close();
@@ -67,9 +65,8 @@ public class DBHelper extends SQLiteOpenHelper{
 			User user = new User();
 			cursor.moveToNext();
 			user.loginType = cursor.getString(0);
-			user.uid = cursor.getString(1);
-			user.name = cursor.getString(2);
-			user.email = cursor.getString(3);
+			JSONObject object = new JSONObject(cursor.getString(1));
+			setUserDataFromJSON(object,user);
 			byte[] image = cursor.getBlob(4);
 			user.bitmap = getImage(image);
 			user.imageUrl = cursor.getString(5);
@@ -77,6 +74,10 @@ public class DBHelper extends SQLiteOpenHelper{
 		}catch (Exception ex){
 			return new User();
 		}
+	}
+
+	private void setUserDataFromJSON(JSONObject object,User user){
+
 	}
 
 	// convert from bitmap to byte array
@@ -90,13 +91,5 @@ public class DBHelper extends SQLiteOpenHelper{
 	public static Bitmap getImage(byte[] image) {
 		return BitmapFactory.decodeByteArray(image, 0, image.length);
 	}
-
-	public void DropTable(String table_Name)
-	{
-		String query = "DROP TABLE IF EXISTS Bookmarked";
-		SQLiteDatabase database = this.getWritableDatabase();
-		database.execSQL(query);
-	}
-
 }
 
